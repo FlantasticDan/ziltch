@@ -1,9 +1,10 @@
 const ntp = new NTP()
 const video = document.getElementById('video')
 
+const latency = document.getElementById('latency')
+const timeOffset = document.getElementById('timeOffset')
+const playSpeed = document.getElementById('playSpeed')
 
-let programDateTime = 0
-let bufferLengthHistory = [];
 const targetDelay = 5  // seconds
 const optimalDelay = targetDelay * 1000 // milliseconds
 
@@ -25,7 +26,8 @@ hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {
     // console.log("FRAG_CHANGED ", data)
     // console.log("currentTime: " + video.currentTime)
     // console.log("programDateTime: " + data.frag.rawProgramDateTime)
-    document.getElementById("info").innerHTML = calculateLiveDelay(data.frag.programDateTime) + ` (${ntp.difference / 1000})`;
+    latency.innerText = calculateLiveDelay(data.frag.programDateTime)
+    timeOffset.innerText = ntp.difference / 1000
 })
 
 function calculateLiveDelay(playbackTimestamp) {
@@ -58,5 +60,6 @@ function getPlaybackRate(drift){
     else {
         playbackRate = 10;
     }
+    playSpeed.innerText = playbackRate
     return playbackRate;
 }

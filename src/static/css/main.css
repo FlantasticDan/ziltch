@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;400;800&family=Paytone+One&display=swap');
+
+:root{
+    --primary: #25a845;
+    --num-font: 'Lexend', sans-serif;
+}
+
+body{
+    margin: 0;
+    font-family: 'Paytone One', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    height: 100%;
+    width: 100%;
+}
+
+html{
+    height: 100%;
+}
+
+.vertical-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.content{
+    padding: 0 1em;
+    text-align: center;
+}
+
+video{
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 1920px;
+    max-height: 75%;
+    padding: 1em;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.bits {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.data{
+    font-family: var(--num-font);
+    font-size: 2em;
+}
+
+.label {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    color: var(--primary);
+}
+
+.header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    color: white;
+    text-align: left;
+    padding: 1em;
+}
+
+.header > img{
+    height: 125px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .header{
+        text-align: center;
+    }
+}

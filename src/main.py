@@ -15,3 +15,7 @@ def ntp():
         'original': client_time,
         'offset': server_time - client_time
     }
+
+@app.get('/favicon.ico')
+def favicon():
+    return app.send_static_file('icons/favicon.ico')

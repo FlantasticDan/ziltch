@@ -11,7 +11,7 @@ class NTP {
         this.difference = 0
 
         this.sync()
-        setInterval(this.sync(), this.resync * 1250)
+        setInterval(this.sync(), this.resync * 1250 * 60)
     }
 
     sync() {

@@ -7,11 +7,35 @@
 
 {% block body %}
 
-    <video height="380" id="video" muted="true" controls></video>
-    <div id="info"></div>
+    <div class="header">
+        <img src="/static/icons/android-chrome-512x512.png">
+    </div>
+
+    <div class="vertical-center">
+        {# <div class="content"> #}
+            <video id="video" muted="true"></video>
+            <div class="bits">
+                <div class="bit">
+                    <div id="latency" class="data"></div>
+                    <div class="label">Latency</div>
+                </div>
+                <div class="bit">
+                    <div id="timeOffset" class="data"></div>
+                    <div class="label">Offset</div>
+                </div>
+                <div class="bit">
+                    <div id="playSpeed" class="data"></div>
+                    <div class="label">Speed</div>
+                </div>
+                
+            </div>
+        {# </div> #}
+    </div>
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://unpkg.com/vue@3"></script>
+    {# <script src="https://unpkg.com/vue@3"></script> #}
     <script src="/static/js/ntp.js"></script>
     <script src="/static/js/player.js"></script>
 {% endblock %}
