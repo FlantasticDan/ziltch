@@ -1,0 +1,17 @@
+{% extends 'base.html.jinja' %}
+
+{% block title %}Ziltch{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+    <video height="380" id="video" muted="true" controls></video>
+    <div id="info"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="/static/js/ntp.js"></script>
+    <script src="/static/js/player.js"></script>
+{% endblock %}

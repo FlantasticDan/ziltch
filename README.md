@@ -6,4 +6,4 @@ Like Twitch, if it supported multi-client stream synchronization, customizable l
 Built on top of the following fantastic projects:
 - [aler9/rtsp-simple-server](https://github.com/aler9/rtsp-simple-server)
 - [nimigeanu/syncronized-live-streaming](https://github.com/nimigeanu/syncronized-live-streaming)
-- [video-dev/hls.js/](https://github.com/video-dev/hls.js/)
+- [video-dev/hls.js](https://github.com/video-dev/hls.js/)
