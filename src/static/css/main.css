@@ -24,58 +24,114 @@ html{
     height: 100%;
 }
 
-.content{
-    padding: 0 1em;
-    text-align: center;
+.text-shadow-10{
+    text-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary),
+        6px 6px 1px var(--primary),
+        7px 7px 1px var(--primary),
+        8px 8px 1px var(--primary),
+        9px 9px 1px var(--primary)
+    ;
 }
 
-video{
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    max-width: 1920px;
-    max-height: 75%;
-    padding: 1em;
-    margin: 0 auto;
-    box-sizing: border-box;
+.text-shadow-5{
+    text-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary)
+    ;
 }
 
-.bits {
-    display: flex;
-    text-align: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    align-content: center;
+.text-shadow-3{
+    text-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary)
+    ;
 }
 
-.data{
-    font-family: var(--num-font);
-    font-size: 2em;
+.text-shadow-20{
+    text-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary),
+        6px 6px 1px var(--primary),
+        7px 7px 1px var(--primary),
+        8px 8px 1px var(--primary),
+        9px 9px 1px var(--primary),
+        10px 10px 1px var(--primary),
+        11px 11px 1px var(--primary),
+        12px 12px 1px var(--primary),
+        13px 13px 1px var(--primary),
+        14px 14px 1px var(--primary),
+        15px 15px 1px var(--primary),
+        16px 16px 1px var(--primary),
+        17px 17px 1px var(--primary),
+        18px 18px 1px var(--primary),
+        19px 19px 1px var(--primary)
+    ;
 }
 
-.label {
-    text-transform: uppercase;
-    font-size: 1.2em;
-    color: var(--primary);
+.box-shadow-30{
+    box-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary),
+        6px 6px 1px var(--primary),
+        7px 7px 1px var(--primary),
+        8px 8px 1px var(--primary),
+        9px 9px 1px var(--primary),
+        10px 10px 1px var(--primary),
+        11px 11px 1px var(--primary),
+        12px 12px 1px var(--primary),
+        13px 13px 1px var(--primary),
+        14px 14px 1px var(--primary),
+        15px 15px 1px var(--primary),
+        16px 16px 1px var(--primary),
+        17px 17px 1px var(--primary),
+        18px 18px 1px var(--primary),
+        19px 19px 1px var(--primary),
+        10px 10px 1px var(--primary),
+        21px 21px 1px var(--primary),
+        22px 22px 1px var(--primary),
+        23px 23px 1px var(--primary),
+        24px 24px 1px var(--primary),
+        25px 25px 1px var(--primary),
+        26px 26px 1px var(--primary),
+        27px 27px 1px var(--primary),
+        28px 28px 1px var(--primary),
+        29px 29px 1px var(--primary)
+    ;
 }
 
-.header {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    color: white;
-    text-align: left;
-    padding: 1em;
-}
-
-.header > img{
-    height: 125px;
-}
-
-@media only screen and (max-width: 1000px) {
-    .header{
-        text-align: center;
-    }
+.box-shadow-10{
+    box-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary),
+        6px 6px 1px var(--primary),
+        7px 7px 1px var(--primary),
+        8px 8px 1px var(--primary),
+        9px 9px 1px var(--primary),
+        10px 10px 1px var(--primary)
+    ;
+    transform: translateX(-5px);
 }

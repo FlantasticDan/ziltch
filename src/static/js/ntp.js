@@ -6,7 +6,7 @@ class NTP {
     constructor() {
         this.samples = 2
         this.serverTimes = new Array,
-        this.resync = 3 // minutes
+        this.resync = 1 // minutes
         this.lastSync = 0
         this.difference = 0
 
@@ -75,3 +75,5 @@ class NTP {
         return this.now() + this.difference
     }
 }
+
+const ntp = new NTP()

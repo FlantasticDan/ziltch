@@ -1,0 +1,56 @@
+.player-container {
+    aspect-ratio: 16 / 9;
+    background: black;
+    /* width: 100%; */
+    max-height: 80vh;
+    margin: auto;
+}
+
+.expand {
+    width: 100%;
+    height: 100%;
+}
+
+#player {
+    position: relative;
+}
+
+.ontop {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.title{
+    font-size:  max(3vw, 1.5em);
+    color: white;
+    margin-top: -.25em;
+}
+
+.viewers{
+    color: white;
+    font-family: var(--num-font);
+    font-size: max(1.5vw, 1em);
+}
+
+.video-overlay{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+.countdown{
+    text-align: center;
+    color: white;
+    font-size:  max(16vw, 4.5em);
+    font-variant-numeric: tabular-nums;
+    /* font-family: var(--num-font); */
+    background-color: #26483d;
+}
+
+#app{
+    padding: 0 1em;
+}
