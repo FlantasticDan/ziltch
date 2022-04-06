@@ -1,9 +1,16 @@
 altgraph==0.17.2
+anyio==3.5.0
+certifi==2021.10.8
+charset-normalizer==2.0.12
 click==8.1.0
 colorama==0.4.4
 Flask==2.1.0
 future==0.18.2
 gunicorn==20.1.0
+h11==0.12.0
+httpcore==0.14.7
+httpx==0.22.0
+idna==3.3
 importlib-metadata==4.11.3
 itsdangerous==2.1.2
 Jinja2==3.1.1
@@ -13,5 +20,9 @@ pyinstaller==4.10
 pyinstaller-hooks-contrib==2022.3
 pywin32-ctypes==0.2.0
 PyYAML==6.0
+rfc3986==1.5.0
+sniffio==1.2.0
+UltraDict @ git+https://github.com/ronny-rentner/UltraDict.git@d32430eea94e2f37a65aa33401370e951432f24a
+waitress==2.1.1
 Werkzeug==2.1.0
 zipp==3.7.0

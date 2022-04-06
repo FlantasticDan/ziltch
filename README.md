@@ -7,3 +7,11 @@ Built on top of the following fantastic projects:
 - [aler9/rtsp-simple-server](https://github.com/aler9/rtsp-simple-server)
 - [nimigeanu/syncronized-live-streaming](https://github.com/nimigeanu/syncronized-live-streaming)
 - [video-dev/hls.js](https://github.com/video-dev/hls.js/)
+
+
+## Setup
+
+### Envioroment Variables
+
+- **`RTSP_SIMPLE_SERVER_COMMAND`** - Fully qualified path to launch an RTSP-Simple-Server instance.
+- **`CONFIG_DIRECTORY`** - Fully qualified path to a ZILTCH configuration folder, usually the default sample folder `\config`.
