@@ -48,7 +48,7 @@
     font-size:  min(max(16vw, 4.5em), 25em);
     font-variant-numeric: tabular-nums;
     /* font-family: var(--num-font); */
-    background-color: #26483d;
+    background-color: var(--green);
 }
 
 #app{

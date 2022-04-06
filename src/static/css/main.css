@@ -2,6 +2,8 @@
 
 :root{
     --primary: #25a845;
+    --red: #a82525;
+    --green: #26483d;
     --num-font: 'Lexend', sans-serif;
 }
 
@@ -50,12 +52,43 @@ html{
     ;
 }
 
+.text-shadow-5.black{
+    text-shadow:
+        0px 0px 1px black,
+        1px 1px 1px black,
+        2px 2px 1px black,
+        3px 3px 1px black,
+        4px 4px 1px black,
+        5px 5px 1px black
+    ;
+}
+
+.text-shadow-5.red{
+    text-shadow:
+        0px 0px 1px var(--red),
+        1px 1px 1px var(--red),
+        2px 2px 1px var(--red),
+        3px 3px 1px var(--red),
+        4px 4px 1px var(--red),
+        5px 5px 1px var(--red)
+    ;
+}
+
 .text-shadow-3{
     text-shadow:
         0px 0px 1px var(--primary),
         1px 1px 1px var(--primary),
         2px 2px 1px var(--primary),
         3px 3px 1px var(--primary)
+    ;
+}
+
+.text-shadow-3.black{
+    text-shadow:
+        0px 0px 1px black,
+        1px 1px 1px black,
+        2px 2px 1px black,
+        3px 3px 1px black
     ;
 }
 
@@ -134,4 +167,28 @@ html{
         10px 10px 1px var(--primary)
     ;
     transform: translateX(-5px);
+}
+
+.box-shadow-5{
+    box-shadow:
+        0px 0px 1px var(--primary),
+        1px 1px 1px var(--primary),
+        2px 2px 1px var(--primary),
+        3px 3px 1px var(--primary),
+        4px 4px 1px var(--primary),
+        5px 5px 1px var(--primary)
+    ;
+    /* transform: translateX(-5px); */
+}
+
+.box-shadow-5.red{
+    box-shadow:
+        0px 0px 1px var(--red),
+        1px 1px 1px var(--red),
+        2px 2px 1px var(--red),
+        3px 3px 1px var(--red),
+        4px 4px 1px var(--red),
+        5px 5px 1px var(--red)
+    ;
+    /* transform: translateX(-5px); */
 }

@@ -18,6 +18,10 @@ def ntp():
         'offset': server_time - client_time
     }
 
+@app.get('/studio')
+def studio():
+    return render_template('studio.html.jinja')
+
 @app.get('/favicon.ico')
 def favicon():
     return app.send_static_file('icons/favicon.ico')

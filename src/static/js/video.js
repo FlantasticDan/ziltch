@@ -17,7 +17,7 @@ const Player = {
                 </div>
                 <div class="ontop expand video-overlay">
                     <div class="header" >
-                        <div class="title text-shadow-3">{{title}}</div>
+                        <div class="title text-shadow-3 black">{{title}}</div>
                         <div class="viewers">{{viewers}} viewers</div>
                     </div>
                     <div></div>
