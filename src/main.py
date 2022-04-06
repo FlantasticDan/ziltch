@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from UltraDict import UltraDict
 
 app = Flask(__name__)
-shared_data = UltraDict(name='ultra')
+shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
 def index():

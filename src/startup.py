@@ -19,8 +19,19 @@ workers = os.getenv('WORKERS', 1)
 if __name__ == '__main__':
 
     from UltraDict import UltraDict
-    shared_data = UltraDict(name='ultra', full_dump_size=100_000)
+    shared_data = UltraDict(name='ziltch', full_dump_size=100_000)
     shared_data['v'] = 0
+    shared_data['cached_v'] = 0
+    shared_data['streamkey'] = 'live'
+    shared_data['onair'] = False
+    shared_data['mode'] = 'offline'
+    shared_data['source'] = ''
+    shared_data['title'] = ''
+    shared_data['countdown'] = 0
+
+    import mediaserver
+    mediaserver.start_onair_listener()
+    mediaserver.start_stat_reset()
 
     if 'Windows' in platform.platform():
         from waitress import serve
