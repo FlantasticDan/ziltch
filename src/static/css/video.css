@@ -24,7 +24,7 @@
 }
 
 .title{
-    font-size:  max(3vw, 1.5em);
+    font-size:  min(max(3vw, 1.5em), 3.5em);
     color: white;
     margin-top: -.25em;
 }
@@ -32,7 +32,7 @@
 .viewers{
     color: white;
     font-family: var(--num-font);
-    font-size: max(1.5vw, 1em);
+    font-size: min(max(1.5vw, 1em), 2em);
 }
 
 .video-overlay{
@@ -45,7 +45,7 @@
 .countdown{
     text-align: center;
     color: white;
-    font-size:  max(16vw, 4.5em);
+    font-size:  min(max(16vw, 4.5em), 25em);
     font-variant-numeric: tabular-nums;
     /* font-family: var(--num-font); */
     background-color: #26483d;
