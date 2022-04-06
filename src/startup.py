@@ -58,4 +58,4 @@ if __name__ == '__main__':
             'bind': f'{host}:{port}',
             'workers': workers
         }
-        App(app, options)
+        App(app, options).run()

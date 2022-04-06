@@ -43,10 +43,6 @@
     font-size:  min(max(1.5vw, 1.5em), 3.5em);
 }
 
-.white{
-    filter: invert(100%) sepia(95%) saturate(20%) hue-rotate(4deg) brightness(105%) contrast(107%);
-}
-
 .green{
     filter: invert(58%) sepia(12%) saturate(2764%) hue-rotate(82deg) brightness(88%) contrast(84%);
 }
@@ -93,7 +89,7 @@
     gap: 10px;
 }
 
-button.mode{
+button.mode, button.action{
     background-color: white;
     border: 2px solid var(--primary);
     font-family: var(--num-font);
@@ -119,6 +115,40 @@ button.mode.selected{
         5px -5px 1px var(--green)
     ;
     /* transform: translateX(-5px); */
+}
+
+input {
+    outline: none;
+    font-size: 1.25em;
+    font-family: var(--num-font);
+    border: 2px solid black;
+}
+
+.side-form{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1em;
+    margin: 1em auto;
+}
+
+.side-form.latency{
+    grid-template-columns: auto 3em 1fr;
+}
+
+.side-form.countdown-input{
+    grid-template-columns: auto 10em 1fr;
+}
+
+.latency-label{
+    font-family: var(--num-font);
+    font-size: 1.25em;
+}
+
+.studio-buttons{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1em;
 }
 
 @media only screen and (max-width: 880px) {

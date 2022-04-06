@@ -54,3 +54,36 @@
 #app{
     padding: 0 1em;
 }
+
+.controls{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    height: 2em;
+    gap: 0.75em;
+    padding: 0.5em;
+}
+
+button.control{
+    background-color: white;
+    border: 2px solid var(--primary);
+    aspect-ratio: 1 / 1;
+    height: 2.5em;
+    width: 2.5em;
+    padding: 0;
+    cursor: pointer;
+    transition: filter 0.5s, background-color 0.5s, box-shadow 0.5s;
+}
+
+/* @media(hover: hover) and (pointer: fine){
+    button.control:hover {
+        background-color: var(--primary);
+        filter: invert(100%) sepia(95%) saturate(20%) hue-rotate(4deg) brightness(105%) contrast(107%);
+        transform: translate(3px, 3px);
+        box-shadow: none;
+    }
+} */
+
+button.control > img{
+    height: 100%;
+    transform: scale(1.5);
+}

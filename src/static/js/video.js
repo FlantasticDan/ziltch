@@ -5,7 +5,9 @@ const Player = {
             countdown: 0,
             viewers: 0,
             mode: 'standby',
-            player: new VideoPlayer()
+            player: new VideoPlayer(),
+            muted: true,
+            fullscreen: false,
         }
     },
     template: `
@@ -21,7 +23,21 @@ const Player = {
                         <div class="viewers">{{viewers}} viewers</div>
                     </div>
                     <div></div>
-                    <div class="controls"></div>
+                    <div class="controls">
+                        <div></div>
+                        <div>
+                            <button class="control box-shadow-3">
+                                <img v-show="muted" src="/static/icons/mute.svg">
+                                <img v-show="!muted" src="/static/icons/sound.svg">
+                            </button>
+                        </div>
+                        <div>
+                            <button class="control box-shadow-3">
+                                <img v-show="fullscreen" src="/static/icons/fullscreened.svg">
+                                <img v-show="!fullscreen" src="/static/icons/fullscreen.svg">
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
