@@ -7,6 +7,7 @@ const StudioPanel = {
             countdownInput: '',
             countdown: 0,
             latency: 5,
+            streamKey: ''
         }
     },
     template: `
@@ -49,20 +50,33 @@ const StudioPanel = {
             </div>
             <div class="studio-buttons">
                 <div></div>
-                <button class="action box-shadow-5">Copy Stream Key</button>
-                <button class="action box-shadow-5">Update Metadata</button>
+                <button class="action box-shadow-5" @click="copyStreamKey">Copy Stream Key</button>
+                <button class="action box-shadow-5" @click="updateMetadata">Update Metadata</button>
             </div>
 
         </div>
     `,
     methods: {
-        changeMode(newMode) {
-            // TODO: Send to Server
-            this.mode = newMode
+        copyStreamKey() {
+            navigator.clipboard.writeText(this.streamKey)
         },
-        updateMetadata() {
-            // TODO: Send to Server
-            console.log('metadata-updated')
+        async changeMode(newMode) {
+            let payload = {
+                mode: newMode
+            }
+            let metadataUpdate = await postToServer(payload, '/studio/mode')
+            updateStudio(metadataUpdate)
+            // this.mode = newMode
+        },
+        async updateMetadata() {
+            let payload = {
+                countdown: this.countdownInput,
+                title: this.title,
+                latency: this.latency
+            }
+            let metadata = await postToServer(payload, location.pathname)
+            updateStudio(metadata)
+            this.countdownInput = ''
         },
         timeSemicoloner() {
             let timeValue = this.countdownInput.slice()
@@ -100,3 +114,19 @@ const StudioPanel = {
 
 const studio = Vue.createApp(StudioPanel).mount('#studio')
 
+function updateStudio(payload) {
+    studio.title = payload['title']
+    studio.latency = payload['latency']
+    studio.countdown = payload['countdown']
+    studio.streamKey = payload['key']
+    studio.streamStatus = payload['status']
+    studio.mode = payload['mode']
+}
+
+async function studioUpdate() {
+    let studioMetadata = await getFromServer('/studio/update')
+    // console.log(studioMetadata)
+    updateStudio(studioMetadata)
+    // setTimeout(() => {studioUpdate()}, 5000)
+}
+studioUpdate()

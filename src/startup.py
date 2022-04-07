@@ -1,7 +1,7 @@
 import os
 import subprocess
 import platform
-from multiprocessing import Manager
+# from multiprocessing import Manager
 
 config_directory = os.getenv('CONFIG_DIRECTORY')
 
@@ -25,9 +25,10 @@ if __name__ == '__main__':
     shared_data['streamkey'] = 'live'
     shared_data['onair'] = False
     shared_data['mode'] = 'offline'
-    shared_data['source'] = ''
+    shared_data['source'] = os.getenv('STREAM_ORIGIN') + 'live/stream.m3u8'
     shared_data['title'] = ''
     shared_data['countdown'] = 0
+    shared_data['latency'] = 5
 
     import mediaserver
     mediaserver.start_onair_listener()
