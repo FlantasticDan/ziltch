@@ -22,7 +22,7 @@ workers = os.getenv('WORKERS', 1)
 if __name__ == '__main__':
 
     from UltraDict import UltraDict
-    shared_data = UltraDict(name='ziltch', full_dump_size=1_000_000)
+    shared_data = UltraDict(name='ziltch', full_dump_size=10_000_000)
     shared_data['v'] = 0
     shared_data['cached_v'] = 0
     shared_data['streamkey'] = 'live'
