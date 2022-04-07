@@ -20,6 +20,19 @@ def ntp():
         'offset': server_time - client_time
     }
 
+@app.get('/viewer')
+def viewer_status():
+    shared_data['v'] += 1
+    return {
+        'title': shared_data['title'],
+        'latency': shared_data['latency'],
+        'countdown': shared_data['countdown'],
+        'viewers': shared_data['cached_v'],
+        'status': shared_data['onair'],
+        'mode': shared_data['mode'],
+        'source': shared_data['source']
+    }
+
 @app.get('/studio')
 def studio():
     return render_template('studio.html.jinja')

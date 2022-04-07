@@ -7,8 +7,12 @@ const StudioPanel = {
             countdownInput: '',
             countdown: 0,
             latency: 5,
-            streamKey: ''
+            streamKey: '',
+            now: Date.now()
         }
+    },
+    created() {
+        setInterval(() => {this.now = ntp.fixedTime()}, 1000)
     },
     template: `
         <div class="studio-container">
@@ -29,23 +33,23 @@ const StudioPanel = {
                     </div>
             </div>
             <div>
-                <form @submit.prevent="updateMetadata" class="side-form">
+                <form @submit.prevent="updateMetadata" class="side-form" autocomplete="off">
                     <label for="title" class="label text-shadow-5 black">Title:</label>
                     <input type="text" v-model="title" id="title" name="title" class="box-shadow-3 black">
                 </form>
             </div>
             <div>
-                <form @submit.prevent="updateMetadata" class="side-form latency">
+                <form @submit.prevent="updateMetadata" class="side-form latency" autocomplete="off">
                     <label for="latency" class="label text-shadow-5 black">Latency:</label>
                     <input type="text" v-model.number="latency" inputmode="numeric" id="latency" name="latency" class="box-shadow-3 black center">
                     <div class="latency-label">seconds</div>
                 </form>
             </div>
             <div>
-                <form @submit.prevent="updateMetadata" class="side-form countdown-input">
+                <form @submit.prevent="updateMetadata" class="side-form countdown-input" autocomplete="off">
                     <label for="countdown" class="label text-shadow-5 black">Countdown:</label>
                     <input type="text" v-model="countdownInput" @input="timeSemicoloner" inputmode="numeric" id="countdown" name="countdown" class="box-shadow-3 black">
-                    <div class="latency-label"></div>
+                    <div class="latency-label">{{countdownDisplay}}</div>
                 </form>
             </div>
             <div class="studio-buttons">
@@ -107,6 +111,31 @@ const StudioPanel = {
                 }
             }
         }
+    },
+    computed: {
+        countdownDisplay() {
+            if (this.countdown <= 0) {
+                return ''
+            }
+
+            let timeDifference = this.countdown - this.now
+            if (timeDifference > 0) {
+                let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+                let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
+                let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000)
+
+                if (hours > 0) {
+                    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+                }
+                if (minutes > 0) {
+                    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+                }
+                return seconds.toString()
+            }
+            else {
+                return ''
+            }
+        }
     }
 
 }
@@ -115,9 +144,21 @@ const StudioPanel = {
 const studio = Vue.createApp(StudioPanel).mount('#studio')
 
 function updateStudio(payload) {
-    studio.title = payload['title']
-    studio.latency = payload['latency']
-    studio.countdown = payload['countdown']
+    if (document.activeElement.id != 'title')
+    {
+        studio.title = payload['title']
+    }
+
+    if (document.activeElement.id != 'latency')
+    {
+        studio.latency = payload['latency']
+    }
+
+    // if (document.activeElement.id != 'countdown')
+    // {
+        studio.countdown = payload['countdown']
+    // }
+    
     studio.streamKey = payload['key']
     studio.streamStatus = payload['status']
     studio.mode = payload['mode']
@@ -127,6 +168,6 @@ async function studioUpdate() {
     let studioMetadata = await getFromServer('/studio/update')
     // console.log(studioMetadata)
     updateStudio(studioMetadata)
-    // setTimeout(() => {studioUpdate()}, 5000)
+    setTimeout(() => {studioUpdate()}, 5000)
 }
 studioUpdate()

@@ -6,8 +6,10 @@ shared_data = UltraDict(name='ziltch')
 
 SERVER_API_ENDPOINT = 'http://127.0.0.1:9997/'
 
-stream_user = token_hex(4)
-stream_pass = token_hex(8)
+stream_user = token_hex(2)
+stream_pass = token_hex(4)
+# stream_user = 'u1'
+# stream_pass = 'p1'
 stream_paylaod = {
     'publishUser': stream_user,
     'publishPass': stream_pass

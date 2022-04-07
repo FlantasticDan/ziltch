@@ -4,14 +4,14 @@ Modern JS port of NTP.js (https://jehiah.cz/a/ntp-for-javascript) by Jehiah Czeb
 
 class NTP {
     constructor() {
-        this.samples = 2
+        this.samples = 4
         this.serverTimes = new Array,
-        this.resync = 1 // minutes
+        this.resync = 0.5 // minutes
         this.lastSync = 0
         this.difference = 0
 
         this.sync()
-        setInterval(this.sync(), this.resync * 1250 * 60)
+        setInterval(() => {this.sync()}, this.resync * 1050 * 60)
     }
 
     sync() {
@@ -41,11 +41,11 @@ class NTP {
         if (this.serverTimes.length >= this.samples) {
             let average = 0
             let i = 0
-            for (i=0; i < this.serverTimes.length; i++) {
+            for (i=1; i < this.serverTimes.length; i++) {
                 average += this.serverTimes[i]
             }
 
-            this.difference = Math.round(average / i)
+            this.difference = Math.round(average / (i - 1))
             this.lastSync = this.now()
         }
         else {

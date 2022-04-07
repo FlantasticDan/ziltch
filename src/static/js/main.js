@@ -9,13 +9,13 @@ async function postToServer(object, endpoint) {
     });
     const responseBody = await response.json();
     return responseBody
-  }
+}
 
-  async function getFromServer(endpoint) {
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      cache: 'no-cache'
-    });
-    const responseBody = await response.json();
-    return responseBody
-  }
+async function getFromServer(endpoint) {
+const response = await fetch(endpoint, {
+    method: 'GET',
+    cache: 'no-cache'
+});
+const responseBody = await response.json();
+return responseBody
+}

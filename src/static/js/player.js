@@ -2,6 +2,7 @@ class VideoPlayer {
     constructor() {
         this.video = undefined
         this.delay = 5 //seconds
+        this.source = ''
 
         // Calculated
         this.latency = 0
@@ -18,7 +19,7 @@ class VideoPlayer {
             // console.log("FRAG_CHANGED ", data)
             // console.log("currentTime: " + video.currentTime)
             // console.log("programDateTime: " + data.frag.rawProgramDateTime)
-            this.latency = calculateLiveDelay(data.frag.programDateTime)
+            this.latency = this.calculateLiveDelay(data.frag.programDateTime)
         })
     }
 
@@ -30,12 +31,13 @@ class VideoPlayer {
         this.hls.loadSource(streamSourceURL)
         this.hls.attachMedia(this.video)
         this.video.play()
+        this.source = streamSourceURL
     }
 
     calculateLiveDelay(playbackTimestamp) {
         let actualDelay = ntp.fixedTime() - playbackTimestamp
         let drift = (this.delay * 1000) - actualDelay
-        this.speed = getPlaybackRate(drift)
+        this.speed = this.getPlaybackRate(drift)
         this.video.playbackRate = this.speed
         return actualDelay / 1000
     }
