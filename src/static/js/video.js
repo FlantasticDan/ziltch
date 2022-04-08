@@ -48,6 +48,9 @@ const Player = {
     `,
     mounted() {
         this.player.mount('vue-video')
+        addEventListener('fullscreenchange', event => {
+            this.fullscreen = ! (document.fullscreenElement == null)
+        })
     },
     computed: {
         standby() {
@@ -94,12 +97,10 @@ const Player = {
                 document.querySelector('#player').requestFullscreen({
                     navigationUI: 'hide'
                 })
-                this.fullscreen = true
                 
             }
             else {
                 document.exitFullscreen()
-                this.fullscreen = false
             }
             
 
