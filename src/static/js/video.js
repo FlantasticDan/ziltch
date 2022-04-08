@@ -30,13 +30,13 @@ const Player = {
                     <div class="controls">
                         <div></div>
                         <div>
-                            <button class="control box-shadow-3" v-show="onair">
+                            <button class="control box-shadow-3" v-show="onair" @click="mute">
                                 <img v-show="muted" src="/static/icons/mute.svg">
                                 <img v-show="!muted" src="/static/icons/sound.svg">
                             </button>
                         </div>
                         <div>
-                            <button class="control box-shadow-3">
+                            <button class="control box-shadow-3" @click="fullscreener">
                                 <img v-show="fullscreen" src="/static/icons/fullscreened.svg">
                                 <img v-show="!fullscreen" src="/static/icons/fullscreen.svg">
                             </button>
@@ -81,6 +81,28 @@ const Player = {
             else {
                 return ''
             }
+        },
+    },
+    methods: {
+        mute() {
+            this.muted = !this.muted
+            this.video.muted = this.muted
+        },
+        fullscreener() {
+            
+            if (document.fullscreenElement == null) {
+                document.querySelector('#player').requestFullscreen({
+                    navigationUI: 'hide'
+                })
+                this.fullscreen = true
+                
+            }
+            else {
+                document.exitFullscreen()
+                this.fullscreen = false
+            }
+            
+
         }
     }
 }
