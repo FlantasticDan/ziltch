@@ -137,12 +137,16 @@ input {
 }
 
 .side-form.countdown-input{
-    grid-template-columns: auto 10em 1fr;
+    grid-template-columns: auto 5em 1fr;
 }
 
 .latency-label{
     font-family: var(--num-font);
     font-size: 1.25em;
+}
+
+.countdown-input > .latency-label{
+    font-size: 0.95em;
 }
 
 .studio-buttons{

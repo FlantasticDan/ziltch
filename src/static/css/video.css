@@ -1,9 +1,35 @@
 .player-container {
     aspect-ratio: 16 / 9;
-    background: black;
+    /* background: black; */
     /* width: 100%; */
     max-height: 80vh;
     margin: auto;
+}
+
+.player-container.apple{
+    background-color: lightgray;
+    text-align: center;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.apple > img {
+    height: 75px;
+}
+
+.apple > div {
+    color: white;
+    font-size: 1.5em;
+    margin-top: -10px;
+}
+
+.apple > p {
+    font-family: var(--num-font);
+    text-align: justify;
+    font-size: 0.72em;
 }
 
 .expand {
@@ -102,4 +128,20 @@ button.control > img{
 
 video{
     cursor: none;
+}
+
+.offline {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.offline > img {
+    height: 110px;
 }

@@ -11,13 +11,14 @@ const Player = {
             now: Date.now(),
             overlay: true,
             overlayTimeout: undefined,
+            apple: false,
         }
     },
     created() {
         setInterval(() => {this.now = ntp.fixedTime()}, 1000)
     },
     template: `
-        <div class="player-container" :class="{'cursor-vanish': !smartOverlay}">
+        <div class="player-container" :class="{'cursor-vanish': !smartOverlay}" v-if="!apple">
             <div id="player" class="expand" v-show="!offline">
                 <video id="vue-video" class="expand" muted="true" playsinline></video>
                 <div class="ontop expand countdown text-shadow-20 vertical-center" :class="{'cursor-vanish': !smartOverlay}" v-show="standby">
@@ -46,6 +47,18 @@ const Player = {
                     </div>
                 </div>
             </div>
+            <div class="offline expand" v-show="offline">
+                <img class="white" src="/static/icons/offline.svg">
+                <span>Offline</span>
+            </div>
+        </div>
+        <div class="player-container apple" v-else>
+            <img src="/static/icons/apple.svg">
+            <div class="text-shadow-5 black">Unsupported Device</div>
+            <p>
+                This video player uses HTTP Live Streaming (HLS) to deliver content to your device, a technology standard which was developed by Apple in 2009.  
+                Apple has chosen to prohibit web developers from leveraging HLS's full feature set on iOS devices, as such this player is disabled on your iPhone.
+            </p>
         </div>
     `,
     mounted() {
@@ -54,6 +67,7 @@ const Player = {
             this.fullscreen = ! (document.fullscreenElement == null)
         })
         this.overlayTimeout = setTimeout(() => {this.overlay = false}, 5000)
+        this.apple = !Hls.isSupported()
     },
     computed: {
         standby() {
