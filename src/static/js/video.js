@@ -89,7 +89,7 @@ const Player = {
     methods: {
         mute() {
             this.muted = !this.muted
-            this.video.muted = this.muted
+            this.player.video.muted = this.muted
         },
         fullscreener() {
             
