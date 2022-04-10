@@ -8,35 +8,37 @@ const Player = {
             player: new VideoPlayer(),
             muted: true,
             fullscreen: false,
-            now: Date.now()
+            now: Date.now(),
+            overlay: true,
+            overlayTimeout: undefined,
         }
     },
     created() {
         setInterval(() => {this.now = ntp.fixedTime()}, 1000)
     },
     template: `
-        <div class="player-container">
+        <div class="player-container" :class="{'cursor-vanish': !smartOverlay}">
             <div id="player" class="expand" v-show="!offline">
                 <video id="vue-video" class="expand" muted="true" playsinline></video>
-                <div class="ontop expand countdown text-shadow-20 vertical-center" v-show="standby">
+                <div class="ontop expand countdown text-shadow-20 vertical-center" :class="{'cursor-vanish': !smartOverlay}" v-show="standby">
                     {{countdownDisplay}}
                 </div>
-                <div class="ontop expand video-overlay">
-                    <div class="header" >
+                <div class="ontop expand video-overlay" :class="{hide: !smartOverlay}" @mouseover="OverlayEnter" @mousemove="OverlayEnter" @mouseleave="overlay=false" @click="OverlayEnter">
+                    <div class="header" :class="{'cursor-vanish': !smartOverlay}">
                         <div class="title text-shadow-3 black">{{title}}</div>
                         <div class="viewers">{{viewers}} viewers</div>
                     </div>
-                    <div></div>
-                    <div class="controls">
+                    <div :class="{'cursor-vanish': !smartOverlay}"></div>
+                    <div class="controls" :class="{'cursor-vanish': !smartOverlay}">
                         <div></div>
                         <div>
-                            <button class="control box-shadow-3" v-show="onair" @click="mute">
+                            <button class="control box-shadow-3" v-show="onair" @click="mute" :class="{'cursor-vanish': !smartOverlay}">
                                 <img v-show="muted" src="/static/icons/mute.svg">
                                 <img v-show="!muted" src="/static/icons/sound.svg">
                             </button>
                         </div>
                         <div>
-                            <button class="control box-shadow-3" @click="fullscreener">
+                            <button class="control box-shadow-3" @click="fullscreener" :class="{'cursor-vanish': !smartOverlay}">
                                 <img v-show="fullscreen" src="/static/icons/fullscreened.svg">
                                 <img v-show="!fullscreen" src="/static/icons/fullscreen.svg">
                             </button>
@@ -51,6 +53,7 @@ const Player = {
         addEventListener('fullscreenchange', event => {
             this.fullscreen = ! (document.fullscreenElement == null)
         })
+        this.overlayTimeout = setTimeout(() => {this.overlay = false}, 5000)
     },
     computed: {
         standby() {
@@ -85,6 +88,14 @@ const Player = {
                 return ''
             }
         },
+        smartOverlay() {
+            if (this.onair) {
+                return this.overlay
+            }
+            else {
+                return true
+            }
+        }
     },
     methods: {
         mute() {
@@ -104,6 +115,15 @@ const Player = {
             }
             
 
+        },
+        OverlayEnter() {
+            try {
+                clearTimeout(this.overlayTimeout)
+            } catch (error) {
+                
+            }
+            this.overlay = true
+            this.overlayTimeout = setTimeout(() => {this.overlay = false}, 5000)
         }
     }
 }

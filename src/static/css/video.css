@@ -40,6 +40,18 @@
     grid-template-rows: auto 1fr auto;
     padding: 0.5em;
     box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.5s;
+    cursor: default;
+}
+
+.video-overlay.hide{
+    opacity: 0;
+    cursor: none !important;
+}
+
+.cursor-vanish{
+    cursor: none !important;
 }
 
 .countdown{
@@ -86,4 +98,8 @@ button.control{
 button.control > img{
     height: 100%;
     transform: scale(1.5);
+}
+
+video{
+    cursor: none;
 }
