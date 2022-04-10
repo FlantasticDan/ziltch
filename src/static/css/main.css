@@ -220,3 +220,44 @@ html{
 .center{
     text-align: center;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    transform: scale(0.8);
+}
+
+.footer > img {
+    height: 80px;
+}
+
+.wordmark{
+    color: white;
+    font-size: 2em;
+    margin-top: -0.1em;
+}
+
+.powered-by {
+    font-family: var(--num-font);
+    flex: 0 0 100%;
+    text-align: center;
+    margin-bottom: -0.9em;
+    font-size: 1.2em;
+}
+
+.version {
+    font-family: var(--num-font);
+    flex: 0 0 100%;
+    text-align: center;
+    font-size: 1em;
+    opacity: 0.8;
+    margin-top: -0.9em;
+}

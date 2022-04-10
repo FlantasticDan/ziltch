@@ -4,12 +4,14 @@ from UltraDict import UltraDict
 
 import countdown
 
+VERSION = 'v0.0.0 (040922)'
+
 app = Flask(__name__)
 shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
 def index():
-    return render_template('index.html.jinja')
+    return render_template('index.html.jinja', version=VERSION)
 
 @app.get('/ntp')
 def ntp():
@@ -35,7 +37,7 @@ def viewer_status():
 
 @app.get('/studio')
 def studio():
-    return render_template('studio.html.jinja')
+    return render_template('studio.html.jinja', version=VERSION)
 
 @app.post('/studio')
 def update_metadata():
