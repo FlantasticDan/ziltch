@@ -1,8 +1,9 @@
 import time
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from UltraDict import UltraDict
 
 import countdown
+from iam import enforce_trust, validate_trust
 
 VERSION = 'v0.0.0 (040922)'
 
@@ -11,7 +12,8 @@ shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
 def index():
-    return render_template('index.html.jinja', version=VERSION)
+    trusted = validate_trust(request.cookies.get('ttoken'))
+    return render_template('index.html.jinja', version=VERSION, trusted=trusted)
 
 @app.get('/ntp')
 def ntp():
@@ -36,10 +38,12 @@ def viewer_status():
     }
 
 @app.get('/studio')
+@enforce_trust
 def studio():
     return render_template('studio.html.jinja', version=VERSION)
 
 @app.post('/studio')
+@enforce_trust
 def update_metadata():
     payload = request.get_json()
     shared_data['title'] = payload['title']
@@ -56,6 +60,7 @@ def update_metadata():
     }
 
 @app.post('/studio/mode')
+@enforce_trust
 def update_studio_mode():
     payload = request.get_json()
     shared_data['mode'] = payload['mode']
@@ -69,6 +74,7 @@ def update_studio_mode():
     }
 
 @app.get('/studio/update')
+@enforce_trust
 def get_studio_metadata():
     return {
         'title': shared_data['title'],
@@ -80,9 +86,20 @@ def get_studio_metadata():
     }
 
 @app.post('/studio/key')
+@enforce_trust
 def get_stream_key():
     return shared_data['streamkey']
 
+@app.get('/trust/<token>')
+def store_trust_token(token):
+    r = make_response('Trust Token Updated')
+    r.set_cookie('ttoken', token, 60 * 60 * 24 * 365, httponly=True)
+    return r
+
+@app.get('/trust')
+@enforce_trust
+def test_trust():
+    return 'Trusted'
 
 @app.get('/favicon.ico')
 def favicon():

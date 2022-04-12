@@ -12,7 +12,8 @@ stream_pass = str(token_hex(4))
 # stream_pass = 'p1'
 stream_paylaod = {
     'publishUser': stream_user,
-    'publishPass': stream_pass
+    'publishPass': stream_pass,
+    'publishIPs': []
 }
 config_request = httpx.post(f'{SERVER_API_ENDPOINT}v1/config/paths/add/live', json=stream_paylaod)
 if config_request.status_code == 400:
