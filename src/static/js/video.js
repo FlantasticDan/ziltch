@@ -15,7 +15,7 @@ const Player = {
         }
     },
     created() {
-        setInterval(() => {this.now = ntp.fixedTime()}, 1000)
+        setInterval(() => {this.now = ntp.fixedTime()}, 100)
     },
     template: `
         <div class="player-container" :class="{'cursor-vanish': !smartOverlay}" v-if="!apple">
@@ -149,7 +149,19 @@ async function viewerUpdate() {
     app.title = viewerData['title']
     app.countdown = viewerData['countdown']
     app.viewers = viewerData['viewers']
-    app.mode = viewerData['mode']
+    if (viewerData['mode'].includes('@')) {
+        target = parseInt(viewerData['mode'].split('@')[1]) - ntp.fixedTime()
+        if (target > 0) {
+            setTimeout(() => {app.mode = 'onair'}, target)
+            // app.mode = ''
+        }
+        else {
+            app.mode = 'onair'
+        }
+    }
+    else {
+        app.mode = viewerData['mode']
+    }
 
     app.player.delay = viewerData['latency']
     if (!app.offline && app.player.source == '' && viewerData['status'])

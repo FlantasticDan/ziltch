@@ -63,7 +63,11 @@ def update_metadata():
 @enforce_trust
 def update_studio_mode():
     payload = request.get_json()
-    shared_data['mode'] = payload['mode']
+    if payload['mode'] == 'onair':
+        live_time = (time.time() + 6) * 1000
+        shared_data['mode'] = f'onair@{live_time}'
+    else:
+        shared_data['mode'] = payload['mode']
     return {
         'title': shared_data['title'],
         'latency': shared_data['latency'],

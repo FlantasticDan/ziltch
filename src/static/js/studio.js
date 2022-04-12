@@ -12,7 +12,7 @@ const StudioPanel = {
         }
     },
     created() {
-        setInterval(() => {this.now = ntp.fixedTime()}, 1000)
+        setInterval(() => {this.now = ntp.fixedTime()}, 100)
     },
     template: `
         <div class="studio-container">
@@ -161,7 +161,19 @@ function updateStudio(payload) {
     
     studio.streamKey = payload['key']
     studio.streamStatus = payload['status']
-    studio.mode = payload['mode']
+    if (payload['mode'].includes('@')) {
+        target = parseInt(payload['mode'].split('@')[1]) - ntp.fixedTime()
+        if (target > 0) {
+            setTimeout(() => {studio.mode = 'onair'}, target)
+            studio.mode = ''
+        }
+        else {
+            studio.mode = 'onair'
+        }
+    }
+    else {
+        studio.mode = payload['mode']
+    }
 }
 
 async function studioUpdate() {
