@@ -4,7 +4,7 @@ const Player = {
             title: '',
             countdown: 0,
             viewers: 0,
-            mode: 'standby',
+            mode: 'offline',
             player: new VideoPlayer(),
             muted: true,
             fullscreen: false,
@@ -27,7 +27,7 @@ const Player = {
                 <div class="ontop expand video-overlay" :class="{hide: !smartOverlay}" @mouseover="OverlayEnter" @mousemove="OverlayEnter" @mouseleave="overlay=false" @click="OverlayEnter">
                     <div class="header" :class="{'cursor-vanish': !smartOverlay}">
                         <div class="title text-shadow-3 black">{{title}}</div>
-                        <div class="viewers">{{viewers}} viewers</div>
+                        <div class="viewers">{{viewers}} {{smartCounter}}</div>
                     </div>
                     <div :class="{'cursor-vanish': !smartOverlay}"></div>
                     <div class="controls" :class="{'cursor-vanish': !smartOverlay}">
@@ -109,6 +109,19 @@ const Player = {
             else {
                 return true
             }
+        },
+        smartCounter() {
+            if (this.standby) {
+                return 'waiting'
+            }
+            else {
+                if (this.viewers == 1) {
+                    return 'viewer'
+                }
+                else {
+                    return 'viewers'
+                }
+            }
         }
     },
     methods: {
@@ -138,6 +151,11 @@ const Player = {
             }
             this.overlay = true
             this.overlayTimeout = setTimeout(() => {this.overlay = false}, 5000)
+        },
+        resetVideoPlayer() {
+            this.player.hls.destroy()
+            this.player = new VideoPlayer()
+            this.player.mount('vue-video')
         }
     }
 }
@@ -147,6 +165,15 @@ const app = Vue.createApp(Player).mount('#app')
 async function viewerUpdate() {
     let viewerData = await getFromServer('/viewer')
     app.title = viewerData['title']
+    if (app.title != '')
+    {
+        document.title = `${app.title} - Ziltch`
+    }
+    else
+    {
+        document.title = 'Ziltch'
+    }
+
     app.countdown = viewerData['countdown']
     app.viewers = viewerData['viewers']
     if (viewerData['mode'].includes('@')) {
@@ -160,13 +187,26 @@ async function viewerUpdate() {
         }
     }
     else {
+        if (app.mode != 'offline' && viewerData['mode'] === 'offline')
+        {
+            app.resetVideoPlayer()
+        }
         app.mode = viewerData['mode']
     }
 
     app.player.delay = viewerData['latency']
+
+    if (app.player.source != '' && !viewerData['status']) {
+        app.resetVideoPlayer()
+    }
+
     if (!app.offline && app.player.source == '' && viewerData['status'])
     {
         app.player.initMedia(viewerData['source'])
+    }
+
+    if (app.mode == 'onair' && !viewerData['status']) {
+        app.mode = 'offline'
     }
 
     setTimeout(() => {viewerUpdate()}, 5000)

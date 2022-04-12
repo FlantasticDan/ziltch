@@ -16,5 +16,5 @@ Built on top of the following fantastic projects:
 - **`RTSP_SIMPLE_SERVER_COMMAND`** - Fully qualified path to launch an RTSP-Simple-Server instance.
 - **`CONFIG_DIRECTORY`** - Fully qualified path to a ZILTCH configuration folder, usually the default sample folder `\config`.
 - **`ORGIN`** - Host address
-- **`STREAM_ORIGIN`** - Host address/path the RTSP Simple Server instanced serves HLS requests at
+- **`STREAM_ORIGIN`** - Host address/path the RTSP Simple Server instance serves HLS requests at
 - **`TRUST_TOKEN`** - Randomly generated url-safe string that is used to validate administrative actions, treat as a password.

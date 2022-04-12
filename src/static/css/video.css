@@ -145,3 +145,8 @@ video{
 .offline > img {
     height: 110px;
 }
+
+.header {
+    padding: 0.35em 0.45em;
+    filter: drop-shadow(2px 2px 2px black);
+}
