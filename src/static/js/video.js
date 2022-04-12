@@ -12,10 +12,13 @@ const Player = {
             overlay: true,
             overlayTimeout: undefined,
             apple: false,
+            stats: false,
+            statsForNerds: '',
         }
     },
     created() {
         setInterval(() => {this.now = ntp.fixedTime()}, 100)
+        setInterval(() => {this.statsForNerds = `· Clock ${ntp.difference / 1000}s · Latency -${this.player.latency}s (${this.player.delay}s) · ${this.player.speed}x`}, 1000)
     },
     template: `
         <div class="player-container" :class="{'cursor-vanish': !smartOverlay}" v-if="!apple">
@@ -27,7 +30,7 @@ const Player = {
                 <div class="ontop expand video-overlay" :class="{hide: !smartOverlay}" @mouseover="OverlayEnter" @mousemove="OverlayEnter" @mouseleave="overlay=false" @click="OverlayEnter">
                     <div class="header" :class="{'cursor-vanish': !smartOverlay}">
                         <div class="title text-shadow-3 black">{{title}}</div>
-                        <div class="viewers">{{viewers}} {{smartCounter}}</div>
+                        <div @click="stats = !stats" class="viewers">{{viewers}} {{smartCounter}} <span v-show="stats">{{statsForNerds}}</span></div>
                     </div>
                     <div :class="{'cursor-vanish': !smartOverlay}"></div>
                     <div class="controls" :class="{'cursor-vanish': !smartOverlay}">
@@ -103,7 +106,7 @@ const Player = {
             }
         },
         smartOverlay() {
-            if (this.onair) {
+            if (this.onair && !this.stats) {
                 return this.overlay
             }
             else {
@@ -122,7 +125,7 @@ const Player = {
                     return 'viewers'
                 }
             }
-        }
+        },
     },
     methods: {
         mute() {
