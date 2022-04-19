@@ -5,9 +5,9 @@ from UltraDict import UltraDict
 import countdown
 from iam import enforce_trust, validate_trust
 
-VERSION = 'v0.1.0 (041122)'
+VERSION = 'v0.2.0 (041822)'
 
-app = Flask(__name__)
+app = Flask(__name__, '/cdn/0.2.0')
 shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
@@ -108,3 +108,7 @@ def test_trust():
 @app.get('/favicon.ico')
 def favicon():
     return app.send_static_file('icons/favicon.ico')
+
+@app.route('/static/<path:filename>')
+def static_polyfill(filename):
+    return app.send_static_file(filename)

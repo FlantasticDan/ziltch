@@ -3,8 +3,8 @@
 {% block title %}Ziltch{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="/static/css/video.css?v=1">
-    <link rel="stylesheet" href="/static/css/studio.css?v=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/video.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/studio.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -31,8 +31,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://unpkg.com/vue@3.2.33/dist/vue.global.prod.js"></script>
-    <script src="/static/js/ntp.js"></script>
-    <script src="/static/js/player.js"></script>
-    <script src="/static/js/video.js"></script>
-    <script src="/static/js/studio.js"></script>
+    <script src="{{ url_for('static', filename='js/ntp.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/player.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/video.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/studio.js') }}"></script>
 {% endblock %}
