@@ -195,6 +195,11 @@ async function viewerUpdate() {
             app.resetVideoPlayer()
         }
         app.mode = viewerData['mode']
+        if (app.mode == 'standby')
+        {
+            app.player.video.muted = true
+            app.muted = true
+        }
     }
 
     app.player.delay = viewerData['latency']
