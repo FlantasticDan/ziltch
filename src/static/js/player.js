@@ -13,6 +13,7 @@ class VideoPlayer {
             autoStartLoad: true,
             liveDurationInfinity: true,
             liveSyncDuration: this.delay,
+            maxAudioFramesDrift: 1
         })
 
         this.hls.on(Hls.Events.FRAG_CHANGED, (event, data) => {

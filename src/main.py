@@ -5,9 +5,9 @@ from UltraDict import UltraDict
 import countdown
 from iam import enforce_trust, validate_trust
 
-VERSION = 'v0.2.0 (041822)'
+VERSION = 'v0.2.1 (042022)'
 
-app = Flask(__name__, '/cdn/0.2.0')
+app = Flask(__name__, '/cdn/0.2.1')
 shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
