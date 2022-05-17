@@ -179,28 +179,37 @@ async function viewerUpdate() {
 
     app.countdown = viewerData['countdown']
     app.viewers = viewerData['viewers']
-    if (viewerData['mode'].includes('@')) {
-        target = parseInt(viewerData['mode'].split('@')[1]) - ntp.fixedTime()
-        if (target > 0) {
-            setTimeout(() => {app.mode = 'onair'}, target)
-            // app.mode = ''
+
+    if (!VIDEO_CONTROLLER.alwaysOn)
+    {
+        if (viewerData['mode'].includes('@')) {
+            target = parseInt(viewerData['mode'].split('@')[1]) - ntp.fixedTime()
+            if (target > 0) {
+                setTimeout(() => {app.mode = 'onair'}, target)
+                // app.mode = ''
+            }
+            else {
+                app.mode = 'onair'
+            }
         }
         else {
-            app.mode = 'onair'
+            if (app.mode != 'offline' && viewerData['mode'] === 'offline')
+            {
+                app.resetVideoPlayer()
+            }
+            app.mode = viewerData['mode']
+            if (app.mode == 'standby')
+            {
+                app.player.video.muted = true
+                app.muted = true
+            }
         }
     }
-    else {
-        if (app.mode != 'offline' && viewerData['mode'] === 'offline')
-        {
-            app.resetVideoPlayer()
-        }
-        app.mode = viewerData['mode']
-        if (app.mode == 'standby')
-        {
-            app.player.video.muted = true
-            app.muted = true
-        }
+    else
+    {
+        app.mode = 'onair'
     }
+    
 
     app.player.delay = viewerData['latency']
 
