@@ -71,6 +71,11 @@ const Player = {
         })
         this.overlayTimeout = setTimeout(() => {this.overlay = false}, 5000)
         this.apple = !Hls.isSupported()
+        
+        if (VIDEO_CONTROLLER.alwaysOn)
+        {
+            this.stats = true
+        }
     },
     computed: {
         standby() {

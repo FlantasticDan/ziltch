@@ -8,7 +8,8 @@ const StudioPanel = {
             countdown: 0,
             latency: 5,
             streamKey: '',
-            now: Date.now()
+            now: Date.now(),
+            onairCountdown: 0
         }
     },
     created() {
@@ -29,7 +30,7 @@ const StudioPanel = {
                     <div class="modes">
                         <button @click="e => changeMode('offline')" :class="{selected: mode === 'offline'}" class="mode box-shadow-5">Offline</button>
                         <button @click="e => changeMode('standby')" :class="{selected: mode === 'standby'}" class="mode box-shadow-5">Standby</button>
-                        <button @click="e => changeMode('onair')" :class="{selected: mode === 'onair'}" class="mode box-shadow-5">On Air</button>
+                        <button @click="e => changeMode('onair')" :class="{selected: mode === 'onair'}" class="mode box-shadow-5">{{onairLabel}}</button>
                     </div>
             </div>
             <div>
@@ -110,6 +111,19 @@ const StudioPanel = {
                     this.countdownInput = timeValue
                 }
             }
+        },
+        timeDisplayer(timeDifference) {
+            let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+            let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
+            let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000)
+
+            if (hours > 0) {
+                return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+            }
+            if (minutes > 0) {
+                return `${minutes}:${seconds.toString().padStart(2, '0')}`
+            }
+            return seconds.toString()
         }
     },
     computed: {
@@ -120,20 +134,30 @@ const StudioPanel = {
 
             let timeDifference = this.countdown - this.now
             if (timeDifference > 0) {
-                let hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-                let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
-                let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000)
-
-                if (hours > 0) {
-                    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-                }
-                if (minutes > 0) {
-                    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-                }
-                return seconds.toString()
+                return this.timeDisplayer(timeDifference)
             }
             else {
                 return ''
+            }
+        },
+        onairLabel() {
+            if (this.onairCountdown == 0)
+            {
+                return 'On Air'
+            }
+            else
+            {
+                let timeRemaining = this.onairCountdown - this.now
+                if (timeRemaining < 0)
+                {
+                    this.onairCountdown = 0
+                    return 'On Air'
+                }
+                else
+                {
+                    return `On Air (${this.timeDisplayer(timeRemaining + 1000)})`
+                }
+
             }
         }
     }
@@ -164,8 +188,12 @@ function updateStudio(payload) {
     if (payload['mode'].includes('@')) {
         target = parseInt(payload['mode'].split('@')[1]) - ntp.fixedTime()
         if (target > 0) {
-            setTimeout(() => {studio.mode = 'onair'}, target)
+            setTimeout(() => {
+                studio.mode = 'onair'
+                studio.onairCountdown = 0
+            }, target)
             studio.mode = ''
+            studio.onairCountdown = parseInt(payload['mode'].split('@')[1])
         }
         else {
             studio.mode = 'onair'
