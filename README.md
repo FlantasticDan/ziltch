@@ -13,7 +13,7 @@ Built on top of the following fantastic projects:
 
 ### Envioroment Variables
 
-- **`RTSP_SIMPLE_SERVER_COMMAND`** - Fully qualified path to launch an RTSP-Simple-Server instance.
+- **`RTSP_SIMPLE_SERVER_COMMAND`** - Fully qualified path to launch an RTSP-Simple-Server instance. (v0.20.0)
 - **`CONFIG_DIRECTORY`** - Fully qualified path to a ZILTCH configuration folder, usually the default sample folder `\config`.
 - **`ORGIN`** - Host address
 - **`STREAM_ORIGIN`** - Host address/path the RTSP Simple Server instance serves HLS requests at
