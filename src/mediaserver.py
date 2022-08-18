@@ -39,6 +39,8 @@ def reset_stats():
     while True:
         shared_data['cached_v'] = shared_data['v']
         shared_data['v'] = 0
+        shared_data['cached_ip'] = shared_data['ip']
+        shared_data['ip'] = ''
         time.sleep(5)
 
 def start_stat_reset():

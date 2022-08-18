@@ -5,9 +5,9 @@ from UltraDict import UltraDict
 import countdown
 from iam import enforce_trust, validate_trust
 
-VERSION = 'v0.4.0 (081722)'
+VERSION = 'v0.4.1 (081722)'
 
-app = Flask(__name__, '/cdn/0.4.0')
+app = Flask(__name__, '/cdn/0.4.1')
 shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
@@ -27,6 +27,7 @@ def ntp():
 @app.get('/viewer')
 def viewer_status():
     shared_data['v'] += 1
+    shared_data['ip'] += request.headers.get('X-Real-IP', request.remote_addr) + ','
     return {
         'title': shared_data['title'],
         'latency': shared_data['latency'],
@@ -93,6 +94,11 @@ def get_studio_metadata():
 @enforce_trust
 def get_stream_key():
     return shared_data['streamkey']
+
+@app.get('/studio/ip')
+@enforce_trust
+def get_client_ips():
+    return shared_data['cached_ip'][:-1]
 
 @app.get('/trust/<token>')
 def store_trust_token(token):
