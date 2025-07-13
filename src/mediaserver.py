@@ -18,13 +18,17 @@ import time
 def update_stream_onair():
     while True:
         try:
+            updated = False
             status = httpx.get(f'{SERVER_API_ENDPOINT}v3/paths/list')
             for item in status.json()['items']:
                 if item['name'] == "live":
                     onair = item['ready']
-            shared_data['onair'] = onair
+                    shared_data['onair'] = onair
+                    updated = True
+            if not updated:
+                shared_data['onair'] = False
         except Exception as e:
-            print(e)
+            shared_data['onair'] = False
         time.sleep(5)
 
 def start_onair_listener():
