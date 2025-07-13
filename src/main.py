@@ -5,9 +5,9 @@ from UltraDict import UltraDict
 import countdown
 from iam import enforce_trust, validate_trust
 
-VERSION = 'v0.4.1 (081722)'
+VERSION = 'v0.5.0 (071325)'
 
-app = Flask(__name__, '/cdn/0.4.1')
+app = Flask(__name__, '/cdn/0.5.0')
 shared_data = UltraDict(name='ziltch')
 
 @app.get('/')
@@ -94,6 +94,13 @@ def get_studio_metadata():
 @enforce_trust
 def get_stream_key():
     return shared_data['streamkey']
+
+@app.post('/auth')
+def mediamtx_auth():
+    print(request.json)
+    if 'live?' + request.json['query'] == shared_data['streamkey']:
+        return ('OK', 200)
+    return ('Unathorized', 500)
 
 @app.get('/studio/ip')
 @enforce_trust

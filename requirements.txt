@@ -16,11 +16,8 @@ itsdangerous==2.1.2
 Jinja2==3.1.1
 MarkupSafe==2.1.1
 pefile==2021.9.3
-pyinstaller==4.10
-pyinstaller-hooks-contrib==2022.3
 python-dotenv==0.20.0
 pywin32-ctypes==0.2.0
-PyYAML==6.0
 rfc3986==1.5.0
 sniffio==1.2.0
 UltraDict @ git+https://github.com/ronny-rentner/UltraDict.git@d32430eea94e2f37a65aa33401370e951432f24a
