@@ -30,7 +30,7 @@ if __name__ == '__main__':
     shared_data['streamkey'] = 'live'
     shared_data['onair'] = False
     shared_data['mode'] = 'offline'
-    shared_data['source'] = os.getenv('STREAM_ORIGIN') + 'live/index.m3u8'
+    shared_data['source'] = os.getenv('STREAM_ORIGIN') + 'live/main_stream.m3u8'
     shared_data['title'] = ''
     shared_data['countdown'] = 0
     shared_data['latency'] = 5
